@@ -69,13 +69,13 @@ yarn deploy --network sepolia
 After deploy to a testnet or local net, you can run the scripts.
 
 ```
-yarn run scripts/fund.js
+yarn hardhat run scripts/fund.js
 ```
 
 or
 
 ```
-yarn run scripts/withdraw.js
+yarn hardhat run scripts/withdraw.js
 ```
 
 ## Estimate gas
