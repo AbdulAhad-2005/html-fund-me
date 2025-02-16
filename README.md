@@ -42,10 +42,6 @@ yarn
 yarn http-server
 ```
 
-When opened in your browser, you should see a small button "Connect Wallet".
-
-Hit it, and you should see metamask pop up prompting you to connect to this site. Confirm to connect your metamask wallet.
-
 # Execute a transaction
 
 If you want to execute a transaction follow this:
@@ -76,14 +72,14 @@ This will deploy a sample contract but this time on an actual testnet like sepol
 
 In your `constants.js` file, update the variable `contractAddress` with the address of the deployed "FundMe" contract. You'll see it near the top of the hardhat output.
 
-3. Connect your [metamask](https://metamask.io/) to your local hardhat blockchain.
-
-> **PLEASE USE A METAMASK ACCOUNT THAT ISNT ASSOCIATED WITH ANY REAL MONEY.**
-> I usually use a few different browser profiles to separate my metamasks easily.
+3. (only if using local hardhat blockchain, if not just click "Connect Wallet" button you should see metamask pop up prompting you to connect to this site. Confirm to connect your metamask wallet.) Connect your [metamask](https://metamask.io/) to your local hardhat blockchain.
 
 In the output of the above command, take one of the private key accounts and [import it into your metamask.](https://metamask.zendesk.com/hc/en-us/articles/360015489331-How-to-import-an-Account)
 
 Additionally, add your localhost with chainid 31337 to your metamask.
+
+> **PLEASE USE A METAMASK ACCOUNT THAT ISNT ASSOCIATED WITH ANY REAL MONEY.**
+> I usually use a few different browser profiles to separate my metamasks easily.
 
 5. Reserve the front end with `yarn http-server`, input an amount in the text box, and hit `fund` button after connecting
 
