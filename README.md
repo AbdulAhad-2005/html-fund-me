@@ -71,8 +71,8 @@ yarn hardhat deploy --network <network name>
 ```
 This will deploy a sample contract but this time on an actual testnet like sepolia. Metamask should pop up to ask to pay the fee to deploy this contract. Once the transaction is confirmed, your contract will be deployed and also verified.
 
-You should keep note of the address at which the contract is deployed.
-2. Update your `constants.js` with the new contract address.
+
+2. Update your `constants.js` with this new contract address.
 
 In your `constants.js` file, update the variable `contractAddress` with the address of the deployed "FundMe" contract. You'll see it near the top of the hardhat output.
 
