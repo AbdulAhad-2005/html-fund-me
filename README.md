@@ -62,7 +62,14 @@ Make sure you have the following installed:
 git clone https://github.com/AbdulAhad2005/hardhat-fund-me
 cd hardhat-fund-me
 yarn
+```
+if you want to fund a contract deployed locally on your computer, then run this command on the second terminal
+```
 yarn hardhat node
+```
+else, if you are deploying on an actual testnet or mainnet, then you should run this command
+```
+yarn hardhat deploy --network <network name>
 ```
 
 This will deploy a sample contract and start a local hardhat blockchain.
