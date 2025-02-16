@@ -44,11 +44,9 @@ yarn
 yarn http-server
 ```
 
-And you should see a small button that says "connect".
+When opened in your browser, you should see a small button "Connect Wallet".
 
-![Connect](connect.png)
-
-Hit it, and you should see metamask pop up.
+Hit it, and you should see metamask pop up prompting you to connect to this site. Confirm to connect your metamask wallet.
 
 # Execute a transaction
 
@@ -67,13 +65,15 @@ if you want to fund a contract deployed locally on your computer, then run this 
 ```
 yarn hardhat node
 ```
+This will deploy a sample contract and start a local hardhat blockchain.
+
 else, if you are deploying on an actual testnet or mainnet, then you should run this command
 ```
 yarn hardhat deploy --network <network name>
 ```
+This will deploy a sample contract but this time on an actual testnet like sepolia. Metamask should pop up to ask to pay the fee to deploy this contract. Once the transaction is confirmed, your contract will be deployed and also verified.
 
-This will deploy a sample contract and start a local hardhat blockchain.
-
+You should keep note of the address at which the contract is deployed.
 2. Update your `constants.js` with the new contract address.
 
 In your `constants.js` file, update the variable `contractAddress` with the address of the deployed "FundMe" contract. You'll see it near the top of the hardhat output.
