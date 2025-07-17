@@ -1,88 +1,163 @@
-# html-fund-me
+# Full Stack Fund Me DApp
 
-# Requirements
+This project is a decentralized application (DApp) that allows users to fund a smart contract via a frontend interface using MetaMask. It consists of:
 
-- [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-  - You'll know you've installed it right if you can run:
-    - `git --version`
-- [Metamask](https://metamask.io/)
-  - This is a browser extension that lets you interact with the blockchain.
-- [Nodejs](https://nodejs.org/en/)
-  - You'll know you've installed nodejs right if you can run:
-    - `node --version` And get an ouput like: `vx.x.x`
-- [Yarn](https://classic.yarnpkg.com/lang/en/docs/install/) instead of `npm`
-  - You'll know you've installed yarn right if you can run:
-    - `yarn --version` And get an output like: `x.x.x`
-    - You might need to install it with npm
+- **Frontend**: A simple HTML/JavaScript application that interacts with the smart contract.
+- **Backend**: A Hardhat-based smart contract development environment using Solidity.
 
-### Optional Gitpod
+---
 
-If you can't or don't want to run and install locally, you can work with this repo in Gitpod. If you do this, you can skip the `clone this repo` part.
+## Table of Contents
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/AbdulAhad-2005/html-fund-me)
+- [Requirements](#requirements)
+- [Getting Started](#getting-started)
+- [Frontend Setup](#frontend-setup)
+- [Backend Setup](#backend-setup)
+- [Deploy to Local Network](#deploy-to-local-network)
+- [Deploy to Testnet (Sepolia)](#deploy-to-testnet-sepolia)
+- [Scripts](#scripts)
+- [Testing and Gas Reports](#testing-and-gas-reports)
+- [Linting & Formatting](#linting--formatting)
+- [Verifying Contracts](#verifying-contracts)
+- [Thank You](#thank-you)
 
-# Quickstart
+---
 
-1. Clone the repo
+## Requirements
+
+- [Node.js](https://nodejs.org/en/)
+- [Yarn](https://yarnpkg.com/getting-started/install)
+- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- [MetaMask](https://metamask.io/) browser extension
+- Optional: [Gitpod](https://gitpod.io/) for cloud-based development
+
+---
+
+## Getting Started
+
+### Clone This Monorepo
+
+```bash
+git clone https://github.com/AbdulAhad-2005/fund-me-fullstack.git
+cd fund-me-fullstack
+```
+
+The directory structure will look like:
 
 ```
-git clone https://github.com/AbdulAhad-2005/html-fund-me
-cd html-fund-me
+fund-me-fullstack/
+│
+├── frontend/        # html-fund-me
+└── backend/         # hardhat-fund-me
 ```
 
-2. Run the file.
+---
 
-You can usually just double click the file to "run it in the browser". Or you can right click the file in your VSCode and run "open with live server".
+## Frontend Setup (`frontend/`)
 
-Optionally:
+### Run Locally
 
-If you'd like to run with prettier formatting, or don't have a way to run your file in the browser, run:
-```
+```bash
+cd frontend
 yarn
 yarn http-server
 ```
 
-# Execute a transaction
+Or simply open `index.html` directly in the browser, or use VS Code's “Open with Live Server”.
 
-If you want to execute a transaction follow this:
+### Connect MetaMask
 
-Make sure you have the following installed:
+Make sure your MetaMask is connected to:
 
-1. You'll need to open up a second terminal and run:
+- The correct testnet (e.g., Sepolia)
+- Or your local Hardhat network (Chain ID: `31337`) using an imported account
 
-```
-git clone https://github.com/AbdulAhad2005/hardhat-fund-me
-cd hardhat-fund-me
+### Fund Transaction
+
+1. Ensure the deployed contract address is added in `constants.js`
+2. Click **Connect Wallet**
+3. Enter an amount and click **Fund**
+
+---
+
+## Backend Setup (`backend/`)
+
+```bash
+cd backend
 yarn
 ```
-if you want to fund a contract deployed locally on your computer, then run this command on the second terminal
+
+### Deploy Locally
+
+```bash
+yarn hardhat node    # Start a local Hardhat chain
 ```
-yarn hardhat node
+
+In a new terminal:
+
+```bash
+yarn deploy          # Deploys to local network
 ```
-This will deploy a sample contract and start a local hardhat blockchain.
 
-else, if you are deploying on an actual testnet or mainnet, then you should run this command
+### Deploy to Sepolia Testnet
+
+1. Add your environment variables to `.env`:
+
+```env
+PRIVATE_KEY=your_private_key
+SEPOLIA_RPC_URL=https://eth-sepolia.example
+ETHERSCAN_API_KEY=your_etherscan_key
+COINMARKETCAP_API_KEY=your_coinmarketcap_key
 ```
-yarn hardhat deploy --network <network name>
+
+2. Run:
+
+```bash
+yarn deploy --network sepolia
 ```
-This will deploy a sample contract but this time on an actual testnet like sepolia. Metamask should pop up to ask to pay the fee to deploy this contract. Once the transaction is confirmed, your contract will be deployed and also verified.
 
+---
 
-2. Update your `constants.js` with this new contract address.
+## Scripts
 
-In your `constants.js` file, update the variable `contractAddress` with the address of the deployed "FundMe" contract. You'll see it near the top of the hardhat output.
+- Fund contract: `yarn hardhat run scripts/fund.js`
+- Withdraw: `yarn hardhat run scripts/withdraw.js`
 
-3. (only if using local hardhat blockchain, if not just click "Connect Wallet" button you should see metamask pop up prompting you to connect to this site. Confirm to connect your metamask wallet.)
-   
-  Connect your [metamask](https://metamask.io/) to your local hardhat blockchain.
+---
 
-In the output of the above command, take one of the private key accounts and [import it into your metamask.](https://metamask.zendesk.com/hc/en-us/articles/360015489331-How-to-import-an-Account)
+## Testing and Gas Reports
 
-Additionally, add your localhost with chainid 31337 to your metamask.
+```bash
+yarn test             # Runs unit tests
+yarn coverage         # Shows test coverage
+```
 
-> **PLEASE USE A METAMASK ACCOUNT THAT ISNT ASSOCIATED WITH ANY REAL MONEY.**
-> I usually use a few different browser profiles to separate my metamasks easily.
+### Gas Estimation
 
-5. Reserve the front end with `yarn http-server`, input an amount in the text box, and hit `fund` button after connecting
+Outputs `gas-report.txt` with estimates. To show cost in USD, add `COINMARKETCAP_API_KEY` to `.env`.
 
-# Thank you!
+---
+
+## Verifying Contracts
+
+```bash
+yarn hardhat verify --constructor-args arguments.js DEPLOYED_CONTRACT_ADDRESS
+```
+
+Requires `ETHERSCAN_API_KEY` in your `.env`.
+
+---
+
+## Linting & Formatting
+
+```bash
+yarn lint             # Check issues
+yarn lint:fix         # Auto-fix issues
+yarn format           # Format code
+```
+
+---
+
+## Thank You
+
+Thanks for checking out this full stack blockchain project. If you encounter issues, feel free to raise them on [GitHub](https://github.com/AbdulAhad-2005).
